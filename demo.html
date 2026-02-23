@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>codebymasood Datepicker — دموی تقویم شمسی مدرن</title>
+<link rel="stylesheet" href="lib/codebymasood-datepicker.css">
+<link rel="stylesheet" href="demo/demo.css">
+<link rel="stylesheet" href="demo/playground.css">
+</head>
+<body class="theme-modern">
+
+<!-- ── Demo Header ── -->
+<div class="demo-header">
+  <h1>🗓️ Codebymasood datepicker (jalali)</h1>
+  <p>تقویم شمسی مدرن و بدون وابستگی — Headless Architecture با سه تم زیبا، انتخاب بازه‌ای، و ماسک ورودی</p>
+</div>
+
+<!-- ── Theme Switcher ── -->
+<div class="theme-switcher" id="themeSwitcher">
+  <button class="theme-btn active" data-theme="modern">مدرن</button>
+  <button class="theme-btn" data-theme="glass">شیشه‌ای</button>
+  <button class="theme-btn" data-theme="classic">کلاسیک</button>
+</div>
+
+
+<!-- ── Demo Sections ── -->
+<div class="demo-sections">
+
+  <!-- Section 1: Multi-instance Popover inputs -->
+  <div class="demo-section-block">
+    <div class="demo-section-label">📌 چند input مستقل (Popover Mode)</div>
+    <div class="demo-inputs-row">
+      <div class="demo-input-group">
+        <label class="demo-input-label">تاریخ شروع</label>
+        <div class="cbm-input-wrapper">
+          <input class="cbm-input" id="input1" type="text" placeholder="۱۴۰۴/۰۱/۰۱" autocomplete="off">
+          <span class="cbm-input-icon">📅</span>
+        </div>
+        <div class="demo-output" id="out1">—</div>
+      </div>
+      <div class="demo-input-group">
+        <label class="demo-input-label">تاریخ پایان</label>
+        <div class="cbm-input-wrapper">
+          <input class="cbm-input" id="input2" type="text" placeholder="۱۴۰۴/۰۱/۰۱" autocomplete="off">
+          <span class="cbm-input-icon">📅</span>
+        </div>
+        <div class="demo-output" id="out2">—</div>
+      </div>
+      <div class="demo-input-group">
+        <label class="demo-input-label">بازه تاریخ</label>
+        <div class="cbm-input-wrapper">
+          <input class="cbm-input" id="input3" type="text" placeholder="۱۴۰۴/۰۱/۰۱  ←  ۱۴۰۴/۰۱/۱۵" autocomplete="off">
+          <span class="cbm-input-icon">📅</span>
+        </div>
+        <div class="demo-output" id="out3">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Inline calendars -->
+  <div class="demo-section-block">
+    <div class="demo-section-label">📋 Inline Mode (همیشه نمایان)</div>
+    <div class="demo-inline-row">
+      <div class="demo-inline-group">
+        <div class="demo-inline-sublabel">انتخاب تک تاریخ</div>
+        <div id="inlineHost1"></div>
+        <div class="demo-output" id="outInline1">—</div>
+      </div>
+      <div class="demo-inline-group">
+        <div class="demo-inline-sublabel">انتخاب بازه</div>
+        <div id="inlineHost2"></div>
+        <div class="demo-output" id="outInline2">—</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ── Playground ── -->
+<section class="pg-section" aria-label="Playground">
+
+  <!-- Header -->
+  <div class="pg-section-header">
+    <div class="pg-header-text">
+      <h2>Playground</h2>
+      <p class="pg-subtitle">تنظیمات را تغییر دهید و نتیجه را زنده ببینید</p>
+    </div>
+    <span class="pg-badge">INTERACTIVE</span>
+  </div>
+
+  <!-- ══ Hero: Preview + Code ══ -->
+  <div class="pg-hero" role="region" aria-label="پیش‌نمایش و کد">
+    <div class="pg-preview-area">
+      <div class="pg-area-label"><span class="pg-area-dot preview"></span>پیش‌نمایش زنده</div>
+      <div class="pg-preview-box" id="pgPreview" role="status" aria-live="polite">
+        <div class="pg-preview-placeholder">
+          <span class="pg-placeholder-icon">📅</span>
+          در حال بارگذاری...
+        </div>
+      </div>
+    </div>
+    <div class="pg-code-area">
+      <div class="pg-area-label"><span class="pg-area-dot code"></span>کد تولیدشده</div>
+      <div class="pg-code-box" role="region" aria-label="Generated code">
+        <div class="pg-code-header">
+          <div class="pg-code-dots" aria-hidden="true">
+            <span class="pg-dot red"></span>
+            <span class="pg-dot yellow"></span>
+            <span class="pg-dot green"></span>
+          </div>
+          <span class="pg-code-filename">script.js</span>
+          <button class="pg-code-copy" id="pgCodeCopy" title="کپی کد" aria-label="کپی کد">📋</button>
+        </div>
+        <pre class="pg-code-content" id="pgCodeOutput" tabindex="0" aria-label="Generated JavaScript code"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Controls: Tabbed ══ -->
+  <div class="pg-controls" role="region" aria-label="تنظیمات">
+    <nav class="pg-tabs" role="tablist" aria-label="تنظیمات تقویم">
+      <button class="pg-tab active" role="tab" aria-selected="true" aria-controls="pgPanelMode" id="pgTabMode">⚙️ حالت نمایش</button>
+      <button class="pg-tab" role="tab" aria-selected="false" aria-controls="pgPanelView" id="pgTabView">📆 نمای اولیه</button>
+      <button class="pg-tab" role="tab" aria-selected="false" aria-controls="pgPanelConstraint" id="pgTabConstraint">🔒 محدودیت</button>
+      <button class="pg-tab" role="tab" aria-selected="false" aria-controls="pgPanelTheme" id="pgTabTheme">🎨 تم</button>
+    </nav>
+
+    <!-- Tab Panel: Mode -->
+    <div class="pg-tab-panel active" role="tabpanel" id="pgPanelMode" aria-labelledby="pgTabMode">
+      <fieldset class="pg-fieldset">
+        <legend class="pg-legend">حالت نمایش و خروجی</legend>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgInline">نمایش Inline</label>
+          <label class="pg-toggle" aria-label="Inline mode toggle">
+            <input type="checkbox" id="pgInline" role="switch" aria-checked="false">
+            <span class="pg-toggle-track"></span>
+          </label>
+        </div>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgRange">انتخاب بازه‌ای</label>
+          <label class="pg-toggle" aria-label="Range mode toggle">
+            <input type="checkbox" id="pgRange" role="switch" aria-checked="false">
+            <span class="pg-toggle-track"></span>
+          </label>
+        </div>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgFormat">فرمت خروجی</label>
+          <select class="pg-select" id="pgFormat" aria-label="Output format">
+            <option value="both">both (جلالی + میلادی)</option>
+            <option value="jalali">jalali (فقط جلالی)</option>
+            <option value="gregorian">gregorian (فقط میلادی)</option>
+          </select>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Tab Panel: Initial View -->
+    <div class="pg-tab-panel" role="tabpanel" id="pgPanelView" aria-labelledby="pgTabView" hidden>
+      <fieldset class="pg-fieldset">
+        <legend class="pg-legend">سال و ماه شروع</legend>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgYear">سال اولیه</label>
+          <input class="pg-input" type="number" id="pgYear" min="1" max="3177" aria-label="Initial year">
+        </div>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgMonth">ماه اولیه</label>
+          <select class="pg-select" id="pgMonth" aria-label="Initial month">
+            <option value="1">۱ — فروردین</option>
+            <option value="2">۲ — اردیبهشت</option>
+            <option value="3">۳ — خرداد</option>
+            <option value="4">۴ — تیر</option>
+            <option value="5">۵ — مرداد</option>
+            <option value="6">۶ — شهریور</option>
+            <option value="7">۷ — مهر</option>
+            <option value="8">۸ — آبان</option>
+            <option value="9">۹ — آذر</option>
+            <option value="10">۱۰ — دی</option>
+            <option value="11">۱۱ — بهمن</option>
+            <option value="12">۱۲ — اسفند</option>
+          </select>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Tab Panel: Constraints -->
+    <div class="pg-tab-panel" role="tabpanel" id="pgPanelConstraint" aria-labelledby="pgTabConstraint" hidden>
+      <fieldset class="pg-fieldset">
+        <legend class="pg-legend">حداقل تاریخ</legend>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgMinToggle">فعال</label>
+          <label class="pg-toggle" aria-label="Enable min date">
+            <input type="checkbox" id="pgMinToggle" role="switch" aria-checked="false">
+            <span class="pg-toggle-track"></span>
+          </label>
+        </div>
+        <div class="pg-field-row">
+          <div class="pg-field-mini">
+            <label for="pgMinY">سال</label>
+            <input class="pg-input sm" type="number" id="pgMinY" value="1404" aria-label="Min year">
+          </div>
+          <div class="pg-field-mini">
+            <label for="pgMinM">ماه</label>
+            <input class="pg-input sm" type="number" id="pgMinM" value="1" min="1" max="12" aria-label="Min month">
+          </div>
+          <div class="pg-field-mini">
+            <label for="pgMinD">روز</label>
+            <input class="pg-input sm" type="number" id="pgMinD" value="1" min="1" max="31" aria-label="Min day">
+          </div>
+        </div>
+      </fieldset>
+      <fieldset class="pg-fieldset">
+        <legend class="pg-legend">حداکثر تاریخ</legend>
+        <div class="pg-field">
+          <label class="pg-field-label" for="pgMaxToggle">فعال</label>
+          <label class="pg-toggle" aria-label="Enable max date">
+            <input type="checkbox" id="pgMaxToggle" role="switch" aria-checked="false">
+            <span class="pg-toggle-track"></span>
+          </label>
+        </div>
+        <div class="pg-field-row">
+          <div class="pg-field-mini">
+            <label for="pgMaxY">سال</label>
+            <input class="pg-input sm" type="number" id="pgMaxY" value="1404" aria-label="Max year">
+          </div>
+          <div class="pg-field-mini">
+            <label for="pgMaxM">ماه</label>
+            <input class="pg-input sm" type="number" id="pgMaxM" value="12" min="1" max="12" aria-label="Max month">
+          </div>
+          <div class="pg-field-mini">
+            <label for="pgMaxD">روز</label>
+            <input class="pg-input sm" type="number" id="pgMaxD" value="29" min="1" max="31" aria-label="Max day">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Tab Panel: Theme -->
+    <div class="pg-tab-panel" role="tabpanel" id="pgPanelTheme" aria-labelledby="pgTabTheme" hidden>
+      <fieldset class="pg-fieldset">
+        <legend class="pg-legend">انتخاب تم</legend>
+        <div class="pg-theme-grid" role="radiogroup" aria-label="Theme selection">
+          <button class="pg-theme-card active" data-theme="modern" role="radio" aria-checked="true">
+            <span class="pg-theme-swatch modern"></span>
+            <span class="pg-theme-name">مدرن</span>
+            <span class="pg-theme-desc">رنگ‌های تازه و مینیمال</span>
+          </button>
+          <button class="pg-theme-card" data-theme="glass" role="radio" aria-checked="false">
+            <span class="pg-theme-swatch glass"></span>
+            <span class="pg-theme-name">شیشه‌ای</span>
+            <span class="pg-theme-desc">شفاف با بلور پس‌زمینه</span>
+          </button>
+          <button class="pg-theme-card" data-theme="classic" role="radio" aria-checked="false">
+            <span class="pg-theme-swatch classic"></span>
+            <span class="pg-theme-name">کلاسیک</span>
+            <span class="pg-theme-desc">تیره و حرفه‌ای</span>
+          </button>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <!-- ══ Tools Row ══ -->
+  <div class="pg-tools" role="region" aria-label="ابزارها">
+
+    <!-- Event Log -->
+    <div class="pg-tool-card">
+      <div class="pg-tool-header">
+        <div class="pg-tool-title">
+          <span class="pg-live-dot" aria-hidden="true"></span>
+          Live Events
+        </div>
+        <button class="pg-tool-action" id="pgLogClear" aria-label="پاک کردن لاگ">پاک کردن</button>
+      </div>
+      <div class="pg-log-list" id="pgLogList" role="log" aria-live="polite" aria-label="Event log">
+        <div class="pg-log-empty">هنوز رویدادی ثبت نشده — یک تاریخ انتخاب کنید</div>
+      </div>
+    </div>
+
+    <!-- API Methods -->
+    <div class="pg-tool-card">
+      <div class="pg-tool-header">
+        <div class="pg-tool-title">🔧 متدهای API</div>
+      </div>
+      <div class="pg-tool-body">
+        <div class="pg-btn-group" role="group" aria-label="Instance methods">
+          <button class="pg-btn" id="pgBtnOpen">open()</button>
+          <button class="pg-btn" id="pgBtnClose">close()</button>
+          <button class="pg-btn accent" id="pgBtnGetValue">getValue()</button>
+          <button class="pg-btn" id="pgBtnClear">clear()</button>
+          <button class="pg-btn danger" id="pgBtnDestroy">destroy()</button>
+        </div>
+        <div class="pg-sep"></div>
+        <div class="pg-inline-form" role="group" aria-label="Set value">
+          <input class="pg-input sm" type="number" id="pgSvY" placeholder="سال" value="1404" aria-label="Year">
+          <input class="pg-input sm" type="number" id="pgSvM" placeholder="ماه" value="1" aria-label="Month">
+          <input class="pg-input sm" type="number" id="pgSvD" placeholder="روز" value="1" aria-label="Day">
+          <button class="pg-btn accent" id="pgBtnSetValue">setValue</button>
+        </div>
+        <div class="pg-sep"></div>
+        <div class="pg-btn-group" role="group" aria-label="Navigation methods">
+          <button class="pg-btn" id="pgBtnToday">goToToday</button>
+          <button class="pg-btn" id="pgBtnPrevMonth">prevMonth</button>
+          <button class="pg-btn" id="pgBtnNextMonth">nextMonth</button>
+          <button class="pg-btn" id="pgBtnPrevYear">prevYear</button>
+          <button class="pg-btn" id="pgBtnNextYear">nextYear</button>
+        </div>
+        <div class="pg-sep"></div>
+        <div class="pg-btn-group" role="group" aria-label="View mode methods">
+          <button class="pg-btn" id="pgBtnViewDay">day view</button>
+          <button class="pg-btn" id="pgBtnViewMonth">month view</button>
+          <button class="pg-btn" id="pgBtnViewYear">year view</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static Helpers -->
+    <div class="pg-tool-card">
+      <div class="pg-tool-header">
+        <div class="pg-tool-title">🧪 توابع استاتیک</div>
+      </div>
+      <div class="pg-tool-body">
+        <div class="pg-helper-block">
+          <code class="pg-fn-name">buildDatePayload</code>
+          <div class="pg-inline-form">
+            <input class="pg-input sm" type="number" id="pgHlpBuildY" placeholder="jy" aria-label="Year">
+            <input class="pg-input sm" type="number" id="pgHlpBuildM" placeholder="jm" aria-label="Month">
+            <input class="pg-input sm" type="number" id="pgHlpBuildD" placeholder="jd" aria-label="Day">
+            <select class="pg-select sm" id="pgHlpBuildFmt" aria-label="Format">
+              <option value="both">both</option>
+              <option value="jalali">jalali</option>
+              <option value="gregorian">gregorian</option>
+            </select>
+            <button class="pg-btn accent" id="pgHlpBuildRun">Run</button>
+          </div>
+          <div class="pg-helper-result" id="pgHlpBuildRes"></div>
+        </div>
+        <div class="pg-sep"></div>
+        <div class="pg-helper-block">
+          <code class="pg-fn-name">formatPersian</code>
+          <div class="pg-inline-form">
+            <input class="pg-input sm" type="number" id="pgHlpFmtY" placeholder="jy" aria-label="Year">
+            <input class="pg-input sm" type="number" id="pgHlpFmtM" placeholder="jm" aria-label="Month">
+            <input class="pg-input sm" type="number" id="pgHlpFmtD" placeholder="jd" aria-label="Day">
+            <button class="pg-btn accent" id="pgHlpFmtRun">Run</button>
+          </div>
+          <div class="pg-helper-result" id="pgHlpFmtRes"></div>
+        </div>
+        <div class="pg-sep"></div>
+        <div class="pg-helper-block">
+          <code class="pg-fn-name">toPersianNum</code>
+          <div class="pg-inline-form">
+            <input class="pg-input" type="text" id="pgHlpNumIn" placeholder="1404" aria-label="Input number">
+            <button class="pg-btn accent" id="pgHlpNumRun">Run</button>
+          </div>
+          <div class="pg-helper-result" id="pgHlpNumRes"></div>
+        </div>
+        <div class="pg-sep"></div>
+        <div class="pg-helper-block">
+          <code class="pg-fn-name">fromPersianNum</code>
+          <div class="pg-inline-form">
+            <input class="pg-input" type="text" id="pgHlpFromIn" placeholder="۱۴۰۴" aria-label="Persian number input">
+            <button class="pg-btn accent" id="pgHlpFromRun">Run</button>
+          </div>
+          <div class="pg-helper-result" id="pgHlpFromRes"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pg-tools -->
+</section><!-- /pg-section -->
+
+<!-- Toast -->
+<div class="pg-toast" id="pgToast" role="alert" aria-live="assertive"></div>
+
+
+<script src="lib/codebymasood-datepicker.js"></script>
+<script src="demo/demo.js"></script>
+<script src="demo/playground.js"></script>
+</body>
+</html>
