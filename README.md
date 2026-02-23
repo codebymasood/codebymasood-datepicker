@@ -1,7 +1,9 @@
 # CodeByMasood Datepicker
 
-A modern, zero-dependency Persian (Jalali/Shamsi) datepicker built with a headless architecture.
-Supports multiple instances, inline mode, range selection, input masking, and theme switching.
+Hey! 👋  
+This is my personal fork of Pardis Jalali Datepicker — a modern, zero-dependency Persian (Jalali/Shamsi) datepicker. Supports multiple instances, inline mode, range selection, input masking, and three cool themes.
+
+---
 
 ---
 
@@ -185,7 +187,7 @@ Add the `cbm-input` class to your `<input>` for the built-in styled input:
 </div>
 ```
 
-The input wrapper is created automatically by `CbmDatepicker` if it does not already exist. You can also wrap it yourself for custom layouts.
+input wrapper is created automatically by `CbmDatepicker` if it does not already exist. You can also wrap it yourself for custom layouts.
 
 ## Browser Support
 
@@ -199,6 +201,7 @@ MIT
 
 ## Support
 
-If you like this project and want to support its development, consider making a small donation:
+If you like this project and want to support me, why not buy me a coffee? ☕  
+Your support keeps me coding and improving this library!
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue?style=for-the-badge&logo=paypal)](https://reymit.ir/codebymasood/?hosted_button_id=YOUR_BUTTON_ID)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-❤️%20Support-orange?style=for-the-badge)](https://reymit.ir/codebymasood/?hosted_button_id=YOUR_BUTTON_ID)
